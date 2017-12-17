@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>login</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="semantic/semantic.min.js"></script>
+    <style type="text/css">
+    body {
+        background-color: #eee;
+    }
+    .ui.container {
+        margin-top: 6em;
+        max-width: 22em !important;
+    }
+    </style>
+</head>
+<!-- http://semantic-ui-forest.com/templates/ -->
+<body>
+    <div class="ui center aligned grid">
+        <div class="ui container">
+            <h1 class="ui huge header">HaHa</h1>
+            <form class="ui large form" action="xlogin" method="post">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input name="email" placeholder="E-mail address" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input name="password" placeholder="Password" type="password" />
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input class="hidden" tabindex="0" type="checkbox" />
+                        <label>Remember me</label>
+                    </div>
+                </div>
+                <div class="ui fluid large primary submit button">
+                    Login
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+    $(document).ready(function() {
+        $('.ui.checkbox').checkbox();
+        $('.ui.form').form({
+            fields: {
+                email: {
+                    identifier: 'email',
+                    rules: [{
+                            type: 'empty',
+                            prompt: 'empty email'
+                        },
+                        {
+                            type: 'email',
+                            prompt: 'error email'
+                        }
+                    ]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'empty password'
+                    }]
+                }
+            },
+            inline: true,
+            on: 'blur'
+        });
+    });
+    </script>
+</body>
+
+</html>
