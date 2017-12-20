@@ -22,9 +22,9 @@ public class ShiroConfig {
 	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		
-		Map<String, Filter> map = new HashMap<String, Filter>();
-		map.put("authc", extraSecurityFormFilter());
-		shiroFilterFactoryBean.setFilters(map);
+		Map<String, Filter> filters = shiroFilterFactoryBean.getFilters(); 
+		filters.put("extra", extraSecurityFormFilter()); // use a custom name for your filter,but not be authc
+		shiroFilterFactoryBean.setFilters(filters);
 		
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 		
@@ -33,8 +33,9 @@ public class ShiroConfig {
 		
 		filterChainDefinitionMap.put("/logout", "logout");
 		
-		filterChainDefinitionMap.put("/**", "user");
-//		filterChainDefinitionMap.put("/**", "authc"); // oops...
+		filterChainDefinitionMap.put("/login", "extra"); // use your custom filter on /login route
+		// filterChainDefinitionMap.put("/**", "user");
+		filterChainDefinitionMap.put("/**", "authc"); // now /** authc is ok
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		
 		shiroFilterFactoryBean.setLoginUrl("/login");
